@@ -1,14 +1,19 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+// Route handler for root path
+app.get('/', (req, res) => {
+  res.status(200).contentType('text/plain').send('Hello, World!');
 });
 
-server.listen(port, hostname, () => {
+// Route handler for alternate path
+app.get('/good-evening', (req, res) => {
+  res.status(200).contentType('text/plain').send('Good evening');
+});
+
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
